@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
-const { DatabaseSync } = require('node:sqlite');
 
 // Writable path in Vercel serverless functions
 const DB_PATH = '/tmp/students.db';
@@ -30,6 +29,8 @@ function initializeDatabase() {
   }
 
   // Open database sync
+  const sqliteModule = 'node:sqlite';
+  const { DatabaseSync } = require(sqliteModule);
   db = new DatabaseSync(DB_PATH);
   searchStmt = db.prepare('SELECT seating_no, arabic_name, total_degree, student_case_desc FROM students WHERE seating_no = ?');
 }

@@ -2,7 +2,8 @@ module.exports = (req, res) => {
   let sqliteAvailable = false;
   let sqliteError = null;
   try {
-    const sqlite = require('node:sqlite');
+    const sqliteModule = 'node:sqlite';
+    const sqlite = require(sqliteModule);
     sqliteAvailable = !!sqlite;
   } catch (err) {
     sqliteError = err.message;
