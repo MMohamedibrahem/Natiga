@@ -6,11 +6,11 @@
   },
   "rewrites": [
     {
-      "source": "/api/student",
-      "destination": "/api/student.js"
+      "source": "/api/(.*)",
+      "destination": "/api/$1.js"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!api/).*)",
       "destination": "/public/$1"
     }
   ]
