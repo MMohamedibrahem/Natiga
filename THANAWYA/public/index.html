@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بوابة نتائج الثانوية العامة 2026 | Thanawya Amma Results</title>
+  <meta name="description" content="البوابة الإلكترونية الرسمية للاستعلام عن نتائج امتحانات الثانوية العامة لعام 2026 برقم الجلوس فور صدورها.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Styling -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+</head>
+<body>
+  
+  <!-- Background Decorative Blurs -->
+  <div class="bg-blur bg-blur-1"></div>
+  <div class="bg-blur bg-blur-2"></div>
+  
+  <div class="container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-container">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+            <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/>
+          </svg>
+        </div>
+        <h1>بوابة نتائج الثانوية العامة</h1>
+        <p class="subtitle">النظام التعليمي الحديث لعام 2026</p>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <!-- Search Form Card -->
+      <section class="card search-card">
+        <h2>الاستعلام عن النتيجة برقم الجلوس</h2>
+        <p class="search-desc">أدخل رقم الجلوس الخاص بك للاستعلام الفوري عن الدرجات وحالة النجاح.</p>
+        
+        <form id="searchForm" novalidate>
+          <div class="input-group">
+            <label for="seatingNo" class="sr-only">رقم الجلوس</label>
+            <span class="input-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </span>
+            <input 
+              type="text" 
+              id="seatingNo" 
+              placeholder="أدخل رقم الجلوس (مثال: 2001970)" 
+              inputmode="numeric" 
+              pattern="[0-9]*" 
+              required 
+              maxlength="10"
+              autocomplete="off"
+            >
+          </div>
+          <button type="submit" class="btn btn-primary" id="searchBtn">
+            <span class="btn-text">عرض النتيجة</span>
+            <span class="btn-spinner hidden"></span>
+          </button>
+        </form>
+        <div id="validationError" class="validation-error hidden"></div>
+      </section>
+
+      <!-- Skeleton Loader -->
+      <div id="skeletonLoader" class="skeleton-container hidden">
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-badge"></div>
+        <div class="skeleton-grid">
+          <div class="skeleton skeleton-circle"></div>
+          <div class="skeleton-lines">
+            <div class="skeleton skeleton-line"></div>
+            <div class="skeleton skeleton-line"></div>
+            <div class="skeleton skeleton-line"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Card (Hidden by default) -->
+      <section id="resultsCard" class="card results-card hidden">
+        <div class="results-header">
+          <div>
+            <h2 id="resStudentName" class="student-name"></h2>
+            <p class="student-seating-container">
+              رقم الجلوس: <span id="resSeatingNo" class="student-seating"></span>
+            </p>
+          </div>
+          <div id="resBadge" class="status-badge"></div>
+        </div>
+
+        <div class="results-body">
+          <!-- Circular Progress Row -->
+          <div class="visual-score-container">
+            <div class="radial-progress-wrapper">
+              <svg class="radial-progress" viewBox="0 0 100 100">
+                <circle class="radial-bg" cx="50" cy="50" r="42" />
+                <circle class="radial-bar" id="radialBar" cx="50" cy="50" r="42" />
+              </svg>
+              <div class="radial-text">
+                <span id="resPercent" class="percent-val">0%</span>
+                <span class="percent-lbl">النسبة المئوية</span>
+              </div>
+            </div>
+            
+            <div class="numeric-score-details">
+              <div class="score-row">
+                <span class="score-label">المجموع الكلي:</span>
+                <span class="score-value"><strong id="resScore">0</strong> / 320 درجة</span>
+              </div>
+              <div class="score-row">
+                <span class="score-label">حالة الطالب:</span>
+                <span class="score-value" id="resStatusDesc">-</span>
+              </div>
+              <div class="score-row">
+                <span class="score-label">العام الدراسي:</span>
+                <span class="score-value">2025 / 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="results-actions">
+          <button id="printBtn" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 6 2 18 2 18 9"/>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+              <rect x="6" y="14" width="12" height="8"/>
+            </svg>
+            <span>طباعة النتيجة</span>
+          </button>
+          <button id="resetBtn" class="btn btn-tertiary">
+            <span>استعلام جديد</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Error Card (Hidden by default) -->
+      <section id="errorCard" class="card error-card hidden">
+        <div class="error-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+          </svg>
+        </div>
+        <h2 id="errorTitle">عذراً، لم يتم العثور على النتيجة</h2>
+        <p id="errorMessage">تأكد من كتابة رقم الجلوس بشكل صحيح وحاول مرة أخرى.</p>
+        <button id="errorResetBtn" class="btn btn-primary">المحاولة مرة أخرى</button>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>تطوير وحفظ الحقوق لـ وزارة التربية والتعليم والتعليم الفني © 2026</p>
+      <p class="eng-footer">Ministry of Education and Technical Education</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
