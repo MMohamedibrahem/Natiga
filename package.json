@@ -2,10 +2,10 @@
   "name": "thanawya-results",
   "version": "1.0.0",
   "description": "Student results search portal for Egyptian High School (Thanawya Amma)",
-  "main": "server.js",
+  "main": "local-server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js"
+    "start": "node local-server.js",
+    "dev": "node --watch local-server.js"
   },
   "engines": {
     "node": "22.x"
