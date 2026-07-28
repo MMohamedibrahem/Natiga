@@ -11,3 +11,4 @@ students.db
 # OS Files
 .DS_Store
 Thumbs.db
+*.xlsx

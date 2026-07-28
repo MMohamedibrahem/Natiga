@@ -1,0 +1,17 @@
+{
+  "functions": {
+    "api/student.js": {
+      "includeFiles": "students.db.gz"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/student",
+      "destination": "/api/student.js"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/public/$1"
+    }
+  ]
+}
